@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { nanoid } from 'nanoid'
+import Confetti from 'react-confetti'
 import { Die } from './Die.jsx'
 import "../styles/main.css"
 
@@ -63,6 +64,7 @@ export function Main() {
 
     return (
         <main className="main">
+            {gameWon && <Confetti />}
             <h3>Roll dice until all are same. Click on a die to select it and freeze it.</h3>
             <div className='dice-container'>
                 {diceElements}
