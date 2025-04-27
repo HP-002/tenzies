@@ -18,9 +18,9 @@ export function Main() {
 
     const [dice, setDice] = useState(generateRandomDice());
 
-    const diceElements = dice.map(die => <Die key={die.id} value={die.value} />);
+    const diceElements = dice.map(die => <Die key={die.id} value={die.value} selected={die.selected} />);
 
-    const updateDice = () => {
+    const rollDice = () => {
         const newDice = dice.map(die => {
             if (die.selected) {
                 return {value: die.value, selected: true, id: die.id};
@@ -40,7 +40,7 @@ export function Main() {
             <div className='dice-container'>
                 {diceElements}
             </div>
-            <button className='roll-button' onClick={updateDice}>Roll</button>
+            <button className='roll-button' onClick={rollDice}>Roll</button>
         </main>
     )
 }
