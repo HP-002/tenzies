@@ -17,15 +17,19 @@ export function Main() {
     }
 
     const [dice, setDice] = useState(generateRandomDice());
-
-    if(
-        dice.every(die => die.selected) &&
+    const gameWon = dice.every(die => die.selected) &&
         dice.every(die => die.value === dice[0].value)
-    ) {
-        console.log("a")
+
+    if (gameWon) {
+        console.log("Game won!")
     }
-    
+
     const rollDice = () => {
+        if (gameWon) {
+            setDice(generateRandomDice())
+            return
+        }
+
         const newDice = dice.map(die => {
             if (die.selected) {
                 return { value: die.value, selected: true, id: die.id };
@@ -63,7 +67,11 @@ export function Main() {
             <div className='dice-container'>
                 {diceElements}
             </div>
-            <button className='roll-button' onClick={rollDice}>Roll</button>
+            <button
+                className='roll-button'
+                onClick={rollDice}
+            >{gameWon ? "New Game" : "Roll"}
+            </button>
         </main>
     )
 }
